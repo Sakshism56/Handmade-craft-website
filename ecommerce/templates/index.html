@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<div class="row">
+    <div class="col-md-3 p-3" style="background-color: rgb(116, 193, 207);">
+        <h5>Filter By Category</h5><hr>
+        <a style="color: black;" href="/product">All</a><br>
+        <a style="color: black;" href="/catfilter/1">Gifts</a><br>
+        <a style="color: black;" href="/catfilter/2">Wall Art</a><br>
+        <a style="color: black;" href="/catfilter/3">Bottle Art</a><br>
+        <a style="color: black;" href="/catfilter/4">Candle</a><br>
+        <a style="color: black;" href="/catfilter/5">Toy</a><br>
+        
+        <br>
+        <h5>Filter By Price</h5><hr>
+        <form method="get" action="/pricefilter">
+          <div class="mb-2">
+            <label for="Input1" class="form-label">Min</label>
+            <input type="text" class="form-control" id="Input1" name="min">
+          </div>
+          <div class="mb-3">
+            <label for="Input2" class="form-label">Max</label>
+            <input type="text" class="form-control" id="Input2" name="max">
+          </div>
+          <div class="mb-2">
+            <input type="submit" value="Filter" class="btn btn-danger">
+          </div>
+        </form>
+        <br>
+        <h5>Sort By Price</h5><hr>
+        <a style="color: black;" href="/sort/0"> Low to High</a><br>
+        <a style="color: black;" href="/sort/1"> High to Low</a><br>
+
+    </div>
+    <div class="col-md-9 p-3">
+      {% if errmsg %}
+      <div class="alert alert-danger">
+        {{errmsg}}
+      </div>
+
+      {% endif %}
+        <div class="row">
+          {% for x in data %}
+          <div class="col-md-3 mb-2">
+            Card1
+            <div class="card" style="width: 100%;">
+              <img src="{{x.pimage.url}}" class="card-img-top" alt="..." height="150px">
+              <div class="card-body">
+                <h5 class="card-title">{{x.name}}</h5>
+                <p class="card-text">{{x.pdetail}}</p>
+                <p class="card-text">{{x.price}}</p>
+                <a href="/productdetail/{{x.id}}" class="btn btn-primary">See More</a>
+              </div>
+            </div>
+          </div><!--product 1-->
+          
+
+          {% endfor %}
+          
+
+
+          
+
+          
+        </div>
+    </div>
+</div><!--2nd row end or main section end-->
+
+{% endblock 'main' %}

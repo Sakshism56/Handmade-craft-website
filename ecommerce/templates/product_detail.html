@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block 'main' %}
+<div class="row mt-3">
+    <div class="col-md-9 mx-auto">
+
+        <div class="row">
+            {% for x in data %}
+            <div class="col-md-5">
+                <img src="{{x.pimage.url}}" class="card-img-top" alt="..." height="200px">
+            </div>
+            <div class="col-md-7">
+                {% if msg %}
+                <div class= 'alert alert-success'>
+                    {{msg}}
+                </div>
+                {% endif %}
+
+                {% if errmsg %}
+                <div class= 'alert alert-danger'>
+                    {{errmsg}}
+                </div>
+                {% endif %}
+                
+                <p><b>Product Name:</b>{{x.name}}</p>
+                <p><b>Product Detail:</b>{{x.pdetail}}</p>
+                {% if x.cat == 1 %}
+                    <p><b>Product Name: </b>Gifts</p>
+                {% elif x.cat == 2 %}
+                    <p><b>Product Category: </b>Wall Art</p>
+                {% elif x.cat == 3 %}
+                    <p><b>Product Category: </b>Bottle Art</p>
+                {% elif x.cat == 4 %}
+                    <p><b>Product Category: </b>Candle</p>
+                
+                {% else %}
+                    <p><b>Product Category: </b>Toy</p>
+                {% endif %}
+
+                <p><b>Product Price:</b>Rs.{{x.price}}</p>
+                <p>
+                    <a href="/addtocart/{{x.id}}" class="btn btn-primary">Add to cart</a>
+                    <a href="/viewcart" class="btn btn-primary">View cart</a>
+                    <a href="/product" class="btn btn-primary">Shop More</a>
+                </p>
+                
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock 'main' %}
